@@ -1,0 +1,11 @@
+O, Observatory, card
+B, Bedroom, card
+L, Lounge, card
+S, Storage Room, card
+K, Kitchen, card
+T, Study, card
+A, Ballroom, card
+I, Library, card
+D, Dining Room, card
+W, Walkway, other
+X, Closet, other
