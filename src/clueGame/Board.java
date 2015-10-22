@@ -292,6 +292,13 @@ public class Board
 		}
 	}
 	
+	
+	public void loadConfigFiles(){}
+	public void selectAnswer(){}
+	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
+	public boolean checkAccusation(Solution accusation){return false;}
+	
+	
 	public BoardCell getCellAt(int row, int column)
 	{
 		return board[row][column];

@@ -1,4 +1,4 @@
-package clueGame;
+package clueTests;
 
 import java.util.LinkedList;
 import java.util.Set;
