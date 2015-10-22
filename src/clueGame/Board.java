@@ -53,7 +53,7 @@ public class Board
 		} 
 		catch (FileNotFoundException e) 
 		{
-			System.out.println("File not found!");
+			System.out.println("File not found at all!");
 		} 
 		catch (BadConfigFormatException e) 
 		{
