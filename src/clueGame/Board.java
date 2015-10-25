@@ -1,9 +1,11 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +13,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
+
 
 public class Board 
 {
@@ -24,7 +29,9 @@ public class Board
 	private Set<BoardCell> visited;
 	private String boardConfigFile;
 	private String roomConfigFile;
-
+	private Player []players;
+	
+	
 	public Board()
 	{
 		boardConfigFile = "ClueBoardCSV.csv";
@@ -33,7 +40,7 @@ public class Board
 		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		targets = new HashSet<BoardCell>();
 	}
-	
+
 	public Board(String boardFile, String boardLegend)
 	{
 		boardConfigFile = boardFile;
@@ -42,7 +49,7 @@ public class Board
 		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		targets = new HashSet<BoardCell>();
 	}
-	
+
 	public void initialize()
 	{
 		try 
@@ -50,6 +57,7 @@ public class Board
 			this.loadRoomConfig();
 			this.loadBoardConfig();
 			this.calcAdjacencies();
+			
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -59,18 +67,18 @@ public class Board
 		{
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
-	
+
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
 		Reader file = new FileReader(roomConfigFile);
 		Scanner in = new Scanner(file);
-		
+
 		String line = "";
 		String separator = ", ";
 		String [] description;
-		
+
 		while(in.hasNextLine())
 		{
 			line = in.nextLine();
@@ -81,7 +89,7 @@ public class Board
 			}
 			rooms.put(description[0].charAt(0), description[1]);
 		}
-		
+
 		try 
 		{
 			file.close();
@@ -92,16 +100,16 @@ public class Board
 		}
 		in.close();
 	}
-	
+
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
 	{
 		Reader tempFile = new FileReader(boardConfigFile);
 		Scanner tempIn = new Scanner(tempFile);
-		
+
 		String line = "";
 		String separator = ",";
 		String [] tempCells;
-		
+
 		while(tempIn.hasNextLine())
 		{
 			numRows++;
@@ -114,8 +122,8 @@ public class Board
 			tempIn.nextLine();
 		}
 		numRows++;
-		
-		
+
+
 		try 
 		{
 			tempFile.close();
@@ -125,16 +133,16 @@ public class Board
 			e.printStackTrace();
 		}
 		tempIn.close();
-		
-		
+
+
 		board = new BoardCell[numRows][numColumns];
-		
+
 		Reader file = new FileReader(boardConfigFile);
 		Scanner in = new Scanner(file);
 		int rowNum = 0;
 		int colNum = 0;
 		String[] cells;
-		
+
 		while(in.hasNextLine())
 		{
 			line = in.nextLine();
@@ -158,28 +166,28 @@ public class Board
 				{
 					switch(s.charAt(1))
 					{
-						case 'u':
-						case 'U':
-							board[rowNum][colNum].setDoorDirection(DoorDirection.UP);
-							break;
-						case 'd':
-						case 'D':
-							board[rowNum][colNum].setDoorDirection(DoorDirection.DOWN);
-							break;
-						case 'r':
-						case 'R':
-							board[rowNum][colNum].setDoorDirection(DoorDirection.RIGHT);
-							break;
-						case 'l':
-						case 'L':
-							board[rowNum][colNum].setDoorDirection(DoorDirection.LEFT);
-							break;
-						case 'n':
-						case 'N':
-							board[rowNum][colNum].setDoorDirection(DoorDirection.NONE);
-							break;
-						default:
-							throw new BadConfigFormatException("Invalid door direction in board config file");
+					case 'u':
+					case 'U':
+						board[rowNum][colNum].setDoorDirection(DoorDirection.UP);
+						break;
+					case 'd':
+					case 'D':
+						board[rowNum][colNum].setDoorDirection(DoorDirection.DOWN);
+						break;
+					case 'r':
+					case 'R':
+						board[rowNum][colNum].setDoorDirection(DoorDirection.RIGHT);
+						break;
+					case 'l':
+					case 'L':
+						board[rowNum][colNum].setDoorDirection(DoorDirection.LEFT);
+						break;
+					case 'n':
+					case 'N':
+						board[rowNum][colNum].setDoorDirection(DoorDirection.NONE);
+						break;
+					default:
+						throw new BadConfigFormatException("Invalid door direction in board config file");
 					}
 				}
 				colNum++;
@@ -196,9 +204,9 @@ public class Board
 			e.printStackTrace();
 		}
 		in.close();
-		
+
 	}
-	
+
 	public void calcAdjacencies()
 	{
 		for(int i = 0; i < board.length; i++)
@@ -243,21 +251,21 @@ public class Board
 							adj.add(board[i][j+1]);
 						}
 					}
-					
+
 					adjMatrix.put(board[i][j], adj);
 				}
-				
+
 			}
 		}
 	}
-	
+
 	public void calcTargets(int row, int column, int pathLength)
 	{
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		
+
 		BoardCell startCell = getCellAt(row, column);
-		
+
 		visited.add(startCell);
 		this.findAllTargets(startCell, pathLength);
 		for(BoardCell b : targets)
@@ -266,12 +274,12 @@ public class Board
 		}
 		System.out.println();
 	}
-	
+
 	public void findAllTargets(BoardCell startCell, int numSteps)
 	{
 		int r = startCell.getRow();
 		int c = startCell.getColumn();
-		
+
 		LinkedList<BoardCell> adj = new LinkedList<BoardCell>(this.getAdjList(r, c));
 		for(BoardCell b : visited)
 		{
@@ -291,14 +299,48 @@ public class Board
 			visited.remove(bc);
 		}
 	}
+
+
 	
 	
-	public void loadConfigFiles(){}
+	
+	// Be sure to trim the color, we don't want spaces around the name
+	public Color convertColor(String strColor) {
+		Color color; 
+		try {     
+			// We can use reflection to convert the string to a color
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim());     
+			color = (Color)field.get(null); } 
+		catch (Exception e) {  
+			color = null; // Not defined } 
+		}
+		return color;
+	}
+
+
+	public void loadConfigFiles(){
+		
+		Scanner s = new Scanner("players.txt").useDelimiter(", ");
+	    players = new Player[6];
+	    int count = 0;
+	    while (s.hasNext()) {
+	       
+		
+		
+	}
+
+	}
+
 	public void selectAnswer(){}
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
 	public boolean checkAccusation(Solution accusation){return false;}
-	
-	
+
+
+	public Player [] getPlayers(){
+		
+		return players;
+	    
+	}
 	public BoardCell getCellAt(int row, int column)
 	{
 		return board[row][column];
@@ -333,5 +375,5 @@ public class Board
 	{
 		return adjMatrix.get(getCellAt(row, col));
 	}
-	
+
 }

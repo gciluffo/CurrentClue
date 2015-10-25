@@ -1,0 +1,6 @@
+player1, black, 11, 6
+Barry, blue, 1, 14
+Yolonda, yellow, 15, 18
+Greyson, green, 18, 5
+Rosa, red, 7, 3
+Plank, magenta, 16, 7
