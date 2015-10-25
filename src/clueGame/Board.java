@@ -57,6 +57,7 @@ public class Board
 			this.loadRoomConfig();
 			this.loadBoardConfig();
 			this.calcAdjacencies();
+			loadConfigFiles();
 			
 		} 
 		catch (FileNotFoundException e) 
@@ -320,13 +321,17 @@ public class Board
 
 	public void loadConfigFiles(){
 		
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner("players.txt").useDelimiter(", ");
 	    players = new Player[6];
 	    int count = 0;
 	    while (s.hasNext()) {
 	       
-		
-		
+		players[count].setPlayerName(s.next());
+		players[count].setColor(convertColor(s.next()));
+		players[count].setRow(s.nextInt());
+		players[count].setColumn(s.nextInt());
+		count++;
 	}
 
 	}
