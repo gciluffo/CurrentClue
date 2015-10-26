@@ -40,7 +40,7 @@ public class GameSetupTests {
 		//checking for right color
 		BoardCell cell = board.getCellAt(players[0].getPlayerRow(), players[0].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 		
 		
@@ -50,7 +50,7 @@ public class GameSetupTests {
 		//checking for right color
 		cell = board.getCellAt(players[1].getPlayerRow(), players[1].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 		
 		
@@ -60,7 +60,7 @@ public class GameSetupTests {
 		//checking for right color
 		cell = board.getCellAt(players[2].getPlayerRow(), players[2].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 		
 		
@@ -70,7 +70,7 @@ public class GameSetupTests {
 		//checking for right color
 		cell = board.getCellAt(players[3].getPlayerRow(), players[3].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 		
 		
@@ -80,7 +80,7 @@ public class GameSetupTests {
 		//checking for right color
 		cell = board.getCellAt(players[4].getPlayerRow(), players[4].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 		
 		
@@ -90,7 +90,7 @@ public class GameSetupTests {
 		//checking for right color
 		cell = board.getCellAt(players[5].getPlayerRow(), players[5].getPlayerColumn());
 		assertEquals(cell.getInitial(), 'W');
-		assertTrue(cell.isDoorway());
+		assertFalse(cell.isDoorway());
 		//Check the player location
 	
 	}

@@ -29,7 +29,7 @@ public class Board
 	private Set<BoardCell> visited;
 	private String boardConfigFile;
 	private String roomConfigFile;
-	private Player []players;
+	private Player players[];
 	
 	
 	public Board()
@@ -57,7 +57,7 @@ public class Board
 			this.loadRoomConfig();
 			this.loadBoardConfig();
 			this.calcAdjacencies();
-			loadConfigFiles();
+			loadPlayerFiles();
 			
 		} 
 		catch (FileNotFoundException e) 
@@ -319,19 +319,31 @@ public class Board
 	}
 
 
-	public void loadConfigFiles(){
+	public void loadPlayerFiles(){
 		
 		@SuppressWarnings("resource")
-		Scanner s = new Scanner("players.txt").useDelimiter(", ");
-	    players = new Player[6];
-	    int count = 0;
-	    while (s.hasNext()) {
-	       
-		players[count].setPlayerName(s.next());
-		players[count].setColor(convertColor(s.next()));
-		players[count].setRow(s.nextInt());
-		players[count].setColumn(s.nextInt());
-		count++;
+		FileReader reader = null;
+		Player p1 = new Player();
+		try {
+			reader = new FileReader("players.txt");
+			Scanner s = new Scanner(reader).useDelimiter(", ");
+		    players = new Player[6];
+		    for( int i = 0; i < 6; i++ )
+		    {
+		    	players[i] = new Player();
+		    }
+		    int count = 0;
+		    while (s.hasNext()) {
+				players[count].setPlayerName(s.next());
+				players[count].setColor(convertColor(s.next()));
+				players[count].setRow(s.nextInt());
+				String temp = s.nextLine();
+				temp = temp.replace(", ", "");
+				players[count].setColumn(Integer.parseInt(temp));
+				count++;
+		    }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 	}
 
 	}
@@ -342,7 +354,6 @@ public class Board
 
 
 	public Player [] getPlayers(){
-		
 		return players;
 	    
 	}
