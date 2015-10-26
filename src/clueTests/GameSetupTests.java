@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 
 public class GameSetupTests {
@@ -99,7 +101,49 @@ public class GameSetupTests {
 	@Test
 	public void testCardInput(){
 		
+		ArrayList<Card> testDeck = board.getDeck();
 		
+		
+		assertEquals(testDeck.size(), 21);
+		//Check the size of the deck
+		
+		
+		
+		int numPlayers = 0;
+		int numWeapons = 0;
+		int numRooms = 0;
+		
+		for(int i = 0; i < testDeck.size(); i++){
+			
+			if(testDeck.get(i).getCardType() == CardType.WEAPON) 
+				numWeapons++;
+			if(testDeck.get(i).getCardType() == CardType.PERSON)
+				numPlayers++;
+			if(testDeck.get(i).getCardType() == CardType.ROOM)
+				numRooms++;
+			
+		}
+		
+		assertEquals(numPlayers, 6);
+		assertEquals(numWeapons, 6);
+		assertEquals(numRooms, 9);
+		//Check that there is the correct number of cards
+		
+		
+		
+		assertEquals(testDeck.get(1).getCardName(), "Barry");
+		assertEquals(testDeck.get(1).getCardType(), CardType.PERSON);
+		//Check player card is in deck
+		
+		
+		assertEquals(testDeck.get(7).getCardName(), "Hammer");
+		assertEquals(testDeck.get(7).getCardType(), CardType.WEAPON);
+		//Check the a weapon card in the deck
+		
+		
+		assertEquals(testDeck.get(13).getCardName(), "Bedroom");
+		assertEquals(testDeck.get(13).getCardType(), CardType.ROOM);
+		//Check for a room card in the deck
 		
 		
 		

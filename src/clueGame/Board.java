@@ -30,6 +30,7 @@ public class Board
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private Player players[];
+	private ArrayList<Card> deck;
 	
 	
 	public Board()
@@ -58,6 +59,7 @@ public class Board
 			this.loadBoardConfig();
 			this.calcAdjacencies();
 			loadPlayerFiles();
+			loadCards();
 			
 		} 
 		catch (FileNotFoundException e) 
@@ -329,7 +331,8 @@ public class Board
 			Scanner s = new Scanner(reader).useDelimiter(", ");
 		    players = new Player[6];
 		    for( int i = 0; i < 6; i++ )
-		    {
+		    {				
+
 		    	players[i] = new Player();
 		    }
 		    int count = 0;
@@ -347,12 +350,43 @@ public class Board
 	}
 
 	}
+	
+	public void loadCards(){
+		
+		@SuppressWarnings("resource")
+		FileReader reader = null;
+		try {
+			reader = new FileReader("Cards.txt");
+			Scanner s = new Scanner(reader).useDelimiter(", ");
+		    int count = 0;
+		    deck = new ArrayList<Card>();
+		    while (s.hasNext()) {
+		    	deck.add(new Card());
+		    	deck.get(count).setCardName(s.next());
+		    	String temp = s.nextLine();
+				temp = temp.replace(", ", "");
+		    	deck.get(count).setCardType(CardType.fromString(temp));
+				count++;
+		    }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+	}
+		
+		
+		
+	}
 
 	public void selectAnswer(){}
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
 	public boolean checkAccusation(Solution accusation){return false;}
 
 
+	public ArrayList<Card> getDeck(){
+		
+		return deck;
+		
+	}
+	
 	public Player [] getPlayers(){
 		return players;
 	    
@@ -392,4 +426,6 @@ public class Board
 		return adjMatrix.get(getCellAt(row, col));
 	}
 
+	
+	
 }
