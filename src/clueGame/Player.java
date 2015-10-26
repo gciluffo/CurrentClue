@@ -35,6 +35,12 @@ public class Player {
 		return column;
 		
 	}
+	
+	public ArrayList<Card> getMyCards(){
+		
+		return myCards;
+		
+	}
 
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;

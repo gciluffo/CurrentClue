@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -144,6 +146,50 @@ public class GameSetupTests {
 		assertEquals(testDeck.get(13).getCardName(), "Bedroom");
 		assertEquals(testDeck.get(13).getCardType(), CardType.ROOM);
 		//Check for a room card in the deck
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void testCardDeal(){
+		
+		ArrayList<Card> testDeck = board.getDeck();
+		Player [] players = board.getPlayers();
+		assertTrue(testDeck.size() > 0);
+		
+		
+		//TODO dealing function
+		
+		
+		assertEquals(testDeck.size(), 0);
+		//Check to make sure all cards are dealt from the deck
+		
+		for(int i = 0; i < 6; i++)
+		assertTrue(players[i].getMyCards().size() == 3 || players[i].getMyCards().size() == 4);
+		//Check that each player has similar amount of cards
+		
+		
+		
+		
+		int numberOfIntersections = 0;
+		for(int i = 0; i < 6; i++){
+			Set<Card> cards1 = new HashSet<Card>(players[i].getMyCards());
+		
+			for(int j = i+1; j < 6; j++){
+				
+				Set<Card> cards2 = new HashSet<Card>(players[j].getMyCards());;
+				cards2.retainAll(cards1);
+				Set<Card> intersection = new HashSet<Card>(cards2);
+				assertEquals(intersection.size(), 0);
+			}
+			
+		}
+		
+		
+		
+		
 		
 		
 		
