@@ -31,6 +31,9 @@ public class GameSetupTests {
 	public void playerFormat() {
 		
 		Player [] players = board.getPlayers();
+		
+		assertEquals(players.length, 6);
+		
 		assertEquals(players[0].getPlayerName(), "player1");
 		//Check to make sure name is loaded correctly
 		assertEquals(players[0].getPlayerColor(), Color.black);
@@ -91,5 +94,17 @@ public class GameSetupTests {
 		//Check the player location
 	
 	}
+	
+	
+	@Test
+	public void testCardInput(){
+		
+		
+		
+		
+		
+	}
+	
+	
 
 }
