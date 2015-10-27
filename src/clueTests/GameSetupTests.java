@@ -161,7 +161,7 @@ public class GameSetupTests {
 		
 		
 		//TODO dealing function
-		
+		board.dealCards();
 		
 		assertEquals(testDeck.size(), 0);
 		//Check to make sure all cards are dealt from the deck
@@ -173,7 +173,6 @@ public class GameSetupTests {
 		
 		
 		
-		int numberOfIntersections = 0;
 		for(int i = 0; i < 6; i++){
 			Set<Card> cards1 = new HashSet<Card>(players[i].getMyCards());
 		
@@ -187,13 +186,12 @@ public class GameSetupTests {
 			
 		}
 		
-		
-		
-		
-		
-		
+		//Check that no player has the same of two cards
 		
 	}
+	
+	
+	
 	
 	
 

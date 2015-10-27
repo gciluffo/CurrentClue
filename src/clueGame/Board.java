@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -31,8 +32,8 @@ public class Board
 	private String roomConfigFile;
 	private Player players[];
 	private ArrayList<Card> deck;
-	
-	
+
+
 	public Board()
 	{
 		boardConfigFile = "ClueBoardCSV.csv";
@@ -60,7 +61,7 @@ public class Board
 			this.calcAdjacencies();
 			loadPlayerFiles();
 			loadCards();
-			
+
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -304,9 +305,9 @@ public class Board
 	}
 
 
-	
-	
-	
+
+
+
 	// Be sure to trim the color, we don't want spaces around the name
 	public Color convertColor(String strColor) {
 		Color color; 
@@ -322,21 +323,21 @@ public class Board
 
 
 	public void loadPlayerFiles(){
-		
+
 		@SuppressWarnings("resource")
 		FileReader reader = null;
 		Player p1 = new Player();
 		try {
 			reader = new FileReader("players.txt");
 			Scanner s = new Scanner(reader).useDelimiter(", ");
-		    players = new Player[6];
-		    for( int i = 0; i < 6; i++ )
-		    {				
+			players = new Player[6];
+			for( int i = 0; i < 6; i++ )
+			{				
 
-		    	players[i] = new Player();
-		    }
-		    int count = 0;
-		    while (s.hasNext()) {
+				players[i] = new Player();
+			}
+			int count = 0;
+			while (s.hasNext()) {
 				players[count].setPlayerName(s.next());
 				players[count].setColor(convertColor(s.next()));
 				players[count].setRow(s.nextInt());
@@ -344,52 +345,74 @@ public class Board
 				temp = temp.replace(", ", "");
 				players[count].setColumn(Integer.parseInt(temp));
 				count++;
-		    }
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-	}
+		}
 
 	}
-	
+
 	public void loadCards(){
-		
+
 		@SuppressWarnings("resource")
 		FileReader reader = null;
 		try {
 			reader = new FileReader("Cards.txt");
 			Scanner s = new Scanner(reader).useDelimiter(", ");
-		    int count = 0;
-		    deck = new ArrayList<Card>();
-		    while (s.hasNext()) {
-		    	deck.add(new Card());
-		    	deck.get(count).setCardName(s.next());
-		    	String temp = s.nextLine();
+			int count = 0;
+			deck = new ArrayList<Card>();
+			while (s.hasNext()) {
+				deck.add(new Card());
+				deck.get(count).setCardName(s.next());
+				String temp = s.nextLine();
 				temp = temp.replace(", ", "");
-		    	deck.get(count).setCardType(CardType.fromString(temp));
+				deck.get(count).setCardType(CardType.fromString(temp));
 				count++;
-		    }
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
 	}
-		
-		
-		
-	}
+	
+	
+	
+	public void dealCards(){
 
+			Collections.shuffle(deck);
+			
+			while(deck.size() != 0){
+				
+				for(int i=0; i < players.length; i++){
+					
+					if(deck.size() != 0){
+					players[i].addMyCards(deck.get(0));
+					deck.remove(0);
+					}
+					else
+						break;
+					
+				}
+				
+				
+			}
+
+
+
+	}
 	public void selectAnswer(){}
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
 	public boolean checkAccusation(Solution accusation){return false;}
 
 
 	public ArrayList<Card> getDeck(){
-		
+
 		return deck;
-		
+
 	}
-	
+
 	public Player [] getPlayers(){
 		return players;
-	    
+
 	}
 	public BoardCell getCellAt(int row, int column)
 	{
@@ -426,6 +449,6 @@ public class Board
 		return adjMatrix.get(getCellAt(row, col));
 	}
 
-	
-	
+
+
 }

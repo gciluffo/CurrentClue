@@ -12,6 +12,12 @@ public class Player {
 	private ArrayList<Card> myCards;
 	private ArrayList<Card> seenCards;
 	
+	
+	
+	public Player() {
+		myCards = new ArrayList<Card>();
+	}
+
 	public Card disproveSuggestion(Solution suggestion){
 		return null;}
 	
@@ -58,4 +64,9 @@ public class Player {
 		this.color = color;
 	}
 	
+	public void addMyCards(Card acard){
+		
+		myCards.add(acard);
+		
+	}
 }
