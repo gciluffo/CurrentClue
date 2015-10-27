@@ -6,6 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.ComputerPlayer;
 import clueGame.Solution;
 
 public class GameActionTests {
@@ -59,6 +61,50 @@ public class GameActionTests {
 	@Test
 	public void testTargetLocation()
 	{
+		ComputerPlayer player = new ComputerPlayer();
+		
+		// Test priority of rooms over walkways
+		board.calcTargets(7, 0, 2);
+		int kitchen = 0;
+		for( int i = 0; i < 20; i++ )
+		{
+			BoardCell selected = player.pickLocation(board.getTargets());
+			if( selected == board.getCellAt(8, 0))
+				kitchen++;
+			else
+				fail("Room Priority Unsuccessful.");
+		}
+		assertTrue(kitchen == 20);
+		
+		// Test random location with no rooms in target.
+		// Pick a location with no rooms in target, four targets
+		board.calcTargets(11, 7, 2);
+		int loc_9_7Tot = 0;
+		int loc_11_5Tot = 0;
+		int loc_12_6Tot = 0;
+		int loc_13_7Tot = 0;
+		// Run the test 100 times
+		for (int i=0; i<100; i++) 
+		{
+			BoardCell selected = player.pickLocation(board.getTargets());
+			if (selected == board.getCellAt(9, 7))
+				loc_9_7Tot++;
+			else if (selected == board.getCellAt(11, 5))
+				loc_11_5Tot++;
+			else if (selected == board.getCellAt(12, 6))
+				loc_12_6Tot++;
+			else if (selected == board.getCellAt(13, 7))
+				loc_13_7Tot++;
+			else
+				fail("Invalid target selected");
+		}
+		// Ensure we have 100 total selections (fail should also ensure)
+		assertEquals(100, loc_9_7Tot + loc_11_5Tot + loc_12_6Tot + loc_13_7Tot);
+		// Ensure each target was selected more than once
+		assertTrue(loc_9_7Tot > 10);
+		assertTrue(loc_11_5Tot > 10);
+		assertTrue(loc_12_6Tot > 10);
+		assertTrue(loc_13_7Tot > 10);
 		
 	}
 }

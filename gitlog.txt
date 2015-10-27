@@ -1,0 +1,84 @@
+commit ebd0425d57a6c6cee2a6dd263695a2cde140416f
+Author: Tyler Bank <tbank@mines.edu>
+Date:   Mon Oct 26 18:40:11 2015 -0600
+
+    Added failing tests for test accusations and then implemented the passing tests.
+
+commit 52a17c9b3554fe8ed137af702cc78dd6afc46c7b
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Mon Oct 26 18:03:11 2015 -0600
+
+    Added implemented methods for dealing cards, passing tests
+
+commit d760134146707037ed1277f2d5c4f4f9feaeeec5
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Mon Oct 26 17:50:52 2015 -0600
+
+    Added failing tests for card dealing
+
+commit 10090b2385d71960e8d9716ced55a94f214d2c68
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Mon Oct 26 17:18:49 2015 -0600
+
+    Added tests for testing deck of cards, and implemented function
+
+commit 1cc1c801d4ddbe4d3906b612b09737f8b048df8d
+Author: Tyler Bank <tbank@mines.edu>
+Date:   Mon Oct 26 16:26:34 2015 -0600
+
+    Implemented passing player initialization tests
+
+commit 986c81c274fee5450efa8b3bc4c49bc66ae332ef
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Mon Oct 26 16:01:09 2015 -0600
+
+    Added deck.txt
+
+commit 843bc05ea18954ae4f3fe75775bf6726940795bc
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Sun Oct 25 16:28:56 2015 -0600
+
+    Implement loading player info
+
+commit 5dfe0c9f0f3e445d5e1ba8678ec3062bcb664db4
+Author: Griffin Ciluffo <griffin@ciluffo.com>
+Date:   Sun Oct 25 16:02:39 2015 -0600
+
+    Added failing test for loading player file
+
+commit a113f69ca3cc08dc8428d671509fabbc525b3b4a
+Author: Tyler Bank <tbank@mines.edu>
+Date:   Sun Oct 25 16:00:34 2015 -0600
+
+    Added basic shell for game action tests.
+
+commit 6484d76b06def93c1a527ce7a9500c211cc7f5a1
+Author: unknown <gciluffo@MZ022-09.adit.mines.edu>
+Date:   Thu Oct 22 12:23:04 2015 -0600
+
+    Added skeleton class for player and card tests
+
+commit a1c4ca50a4461a963f5f3b7ce746be9f3b46bc55
+Merge: 032fb70 506ed84
+Author: unknown <gciluffo@MZ022-09.adit.mines.edu>
+Date:   Thu Oct 22 11:55:40 2015 -0600
+
+    Merge branch 'master' of https://github.com/gciluffo/CurrentClue
+
+commit 032fb706aaaf37e8790a63b279008ef38783711c
+Author: unknown <gciluffo@MZ022-09.adit.mines.edu>
+Date:   Thu Oct 22 11:54:28 2015 -0600
+
+    Fixing bugs
+
+commit c32ac2c16231d72ed4963bba7be9b12e173f6769
+Author: unknown <gciluffo@MZ022-09.adit.mines.edu>
+Date:   Thu Oct 22 11:50:50 2015 -0600
+
+    Initial Commit
+
+commit 506ed84b4eb64b3372a7a9c5392d93b2db93baf0
+Author: gciluffo <griffin@ciluffo.com>
+Date:   Thu Oct 22 11:45:02 2015 -0600
+
+    Initial commit

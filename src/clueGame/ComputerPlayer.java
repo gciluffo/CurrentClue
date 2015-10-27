@@ -4,7 +4,11 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
-	public void pickLocation(Set<BoardCell> targets){}
+	public BoardCell pickLocation(Set<BoardCell> targets){
+		
+		return null;
+	}
+	
 	public void makeAccusation(){}
 	public void makeSuggestion(Board board, BoardCell location){}
 

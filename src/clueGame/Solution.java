@@ -5,6 +5,7 @@ public class Solution {
 	public String person;
 	public String room;
 	public String weapon;
+	
 	public String getPerson() {
 		return person;
 	}
@@ -23,7 +24,4 @@ public class Solution {
 	public void setWeapon(String weapon) {
 		this.weapon = weapon;
 	}
-	
-	
-	
 }
