@@ -68,6 +68,7 @@ public class GameActionTests {
 		int kitchen = 0;
 		for( int i = 0; i < 20; i++ )
 		{
+			player.getVisitedDoors().clear();
 			BoardCell selected = player.pickLocation(board.getTargets());
 			if( selected == board.getCellAt(8, 0))
 				kitchen++;
@@ -105,6 +106,10 @@ public class GameActionTests {
 		assertTrue(loc_11_5Tot > 10);
 		assertTrue(loc_12_6Tot > 10);
 		assertTrue(loc_13_7Tot > 10);
+		
+		
+		
+		
 		
 	}
 }

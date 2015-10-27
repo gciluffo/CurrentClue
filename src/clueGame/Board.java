@@ -387,7 +387,7 @@ public class Board
 		}
 		
 		// get random weapon
-		int weaponIndex = (int) (Math.floor(Math.random() * 6) + 6);
+		int weaponIndex = (int) (Math.floor(Math.random() * 6) + 5);
 		if(deck.get(weaponIndex).getCardType() == CardType.WEAPON){
 			answer.setPerson(deck.get(weaponIndex).getCardName());
 			deck.remove(weaponIndex);
@@ -395,7 +395,7 @@ public class Board
 		
 		
 		// get random room
-		int roomIndex = (int) (Math.floor(Math.random() * 9) + 12);
+		int roomIndex = (int) (Math.floor(Math.random() * 9) + 10);
 		if(deck.get(roomIndex).getCardType() == CardType.ROOM){
 			answer.setPerson(deck.get(roomIndex).getCardName());
 			deck.remove(roomIndex);

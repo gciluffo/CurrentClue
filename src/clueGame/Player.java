@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player {
 
@@ -11,11 +13,12 @@ public class Player {
 	private Color color;
 	private ArrayList<Card> myCards;
 	private ArrayList<Card> seenCards;
-	
+	protected Set<BoardCell> visitedDoors;
 	
 	
 	public Player() {
 		myCards = new ArrayList<Card>();
+		visitedDoors = new HashSet<BoardCell>();
 	}
 
 	public Card disproveSuggestion(Solution suggestion){
@@ -68,5 +71,10 @@ public class Player {
 		
 		myCards.add(acard);
 		
+	}
+	
+	public Set<BoardCell> getVisitedDoors(){
+		
+		return visitedDoors;
 	}
 }
