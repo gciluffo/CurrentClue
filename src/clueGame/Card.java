@@ -2,6 +2,13 @@ package clueGame;
 
 public class Card {
 	
+	public Card(){};
+	
+	public Card(String cardName, CardType cardType) {
+		super();
+		this.cardName = cardName;
+		this.cardType = cardType;
+	}
 	private String cardName;
 	private CardType cardType;
 	public boolean equals(){
