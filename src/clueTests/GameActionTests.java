@@ -68,6 +68,8 @@ public class GameActionTests {
 		int kitchen = 0;
 		for( int i = 0; i < 20; i++ )
 		{
+			// our player class keeps track of visited doors, clear this set 
+			// just for this test scenario
 			player.getVisitedDoors().clear();
 			BoardCell selected = player.pickLocation(board.getTargets());
 			if( selected == board.getCellAt(8, 0))
