@@ -192,5 +192,51 @@ public class GameActionTests {
 		assertTrue(person > 10);
 		assertTrue(weapon > 10);
 		assertTrue(room > 10);
+		
+		// set up array of players with different cards.
+		// by default, players[0] is human player. players[1-5] are computers.
+		players[0].getMyCards().clear();
+		players[0].addMyCards(barryCard);
+		players[1].addMyCards(bucketCard);
+		players[2].addMyCards(kitchenCard);
+		players[3].addMyCards(greysonCard);
+		players[4].addMyCards(hammerCard);
+		players[5].addMyCards(bedroomCard);
+		
+		// make suggestion no one can disprove
+		suggestion.person = null;
+		suggestion.weapon = null;
+		suggestion.room = null;
+		
+		assertTrue(board.handleSuggestion(suggestion, 
+				players[0].getPlayerName(), new BoardCell(8,0,'k')) == null);
+		
+		// make suggestion only one person can disprove. 
+		// This person should be checked last
+				suggestion.person = barryCard.getCardName();
+				suggestion.weapon = null;
+				suggestion.room = null;
+				
+		assertTrue(board.handleSuggestion(suggestion, 
+				players[1].getPlayerName(), new BoardCell(8,0,'k')) == barryCard);
+		
+		// make suggestion only one person can disprove. 
+		// But the person who can disprove it made the suggestion
+				suggestion.person = barryCard.getCardName();
+				suggestion.weapon = null;
+				suggestion.room = null;
+						
+		assertTrue(board.handleSuggestion(suggestion, 
+				players[0].getPlayerName(), new BoardCell(8,0,'k')) == null);
+		
+		// make suggestion 2 people can disprove. 
+		// But the person who disproves it comes first in ordering of players
+				suggestion.person = barryCard.getCardName();
+				suggestion.weapon = bucketCard.getCardName();
+				suggestion.room = null;
+						
+		assertTrue(board.handleSuggestion(suggestion, 
+				players[3].getPlayerName(), new BoardCell(8,0,'k')) == barryCard);
+		
 	}
 }

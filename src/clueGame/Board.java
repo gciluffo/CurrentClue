@@ -328,15 +328,16 @@ public class Board
 
 		@SuppressWarnings("resource")
 		FileReader reader = null;
-		Player p1 = new Player();
 		try {
 			reader = new FileReader("players.txt");
 			Scanner s = new Scanner(reader).useDelimiter(", ");
 			players = new Player[6];
 			for( int i = 0; i < 6; i++ )
 			{				
-
-				players[i] = new Player();
+				if( i == 0 )
+					players[i] = new HumanPlayer();
+				else
+					players[i] = new ComputerPlayer();
 			}
 			int count = 0;
 			while (s.hasNext()) {
