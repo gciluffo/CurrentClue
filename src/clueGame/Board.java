@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class Board
 	private String roomConfigFile;
 	private Player players[];
 	private ArrayList<Card> deck;
+	private static Solution answer;
 
 
 	public Board()
@@ -374,34 +376,64 @@ public class Board
 		}
 	}
 	
-	
+	public void selectAnswer()
+	{
+		answer = new Solution();
+		// get random player
+		int playerIndex = (int) (Math.floor(Math.random() * 6));
+		if(deck.get(playerIndex).getCardType() == CardType.PERSON){
+			answer.setPerson(deck.get(playerIndex).getCardName());
+			deck.remove(playerIndex);
+		}
+		
+		// get random weapon
+		int weaponIndex = (int) (Math.floor(Math.random() * 6) + 6);
+		if(deck.get(weaponIndex).getCardType() == CardType.WEAPON){
+			answer.setPerson(deck.get(weaponIndex).getCardName());
+			deck.remove(weaponIndex);
+		}
+		
+		
+		// get random room
+		int roomIndex = (int) (Math.floor(Math.random() * 9) + 12);
+		if(deck.get(roomIndex).getCardType() == CardType.ROOM){
+			answer.setPerson(deck.get(roomIndex).getCardName());
+			deck.remove(roomIndex);
+		}
+	}
 	
 	public void dealCards(){
-
-			Collections.shuffle(deck);
+		
+		selectAnswer();
+		
+		Collections.shuffle(deck);
+		
+		while(deck.size() != 0){
 			
-			while(deck.size() != 0){
+			for(int i=0; i < players.length; i++){
 				
-				for(int i=0; i < players.length; i++){
-					
-					if(deck.size() != 0){
-					players[i].addMyCards(deck.get(0));
-					deck.remove(0);
-					}
-					else
-						break;
-					
+				if(deck.size() != 0){
+				players[i].addMyCards(deck.get(0));
+				deck.remove(0);
 				}
-				
+				else
+					break;
 				
 			}
-
-
+			
+			
+		}
 
 	}
-	public void selectAnswer(){}
+	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
-	public boolean checkAccusation(Solution accusation){return false;}
+	
+	public boolean checkAccusation(Solution accusation){
+		if( accusation.equals(answer) )
+			return true;
+		else 
+			return false;
+	}
 
 
 	public ArrayList<Card> getDeck(){
@@ -447,6 +479,10 @@ public class Board
 	public LinkedList<BoardCell> getAdjList(int row, int col) 
 	{
 		return adjMatrix.get(getCellAt(row, col));
+	}
+
+	public Solution getSolution() {
+		return answer;
 	}
 
 

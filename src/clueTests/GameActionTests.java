@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Solution;
 
 public class GameActionTests {
 	
@@ -33,7 +34,20 @@ public class GameActionTests {
 	@Test
 	public void testAccusation()
 	{
+		board.dealCards();
 		
+		// test actual solution
+		Solution test = board.getSolution();
+		
+		assertTrue(board.checkAccusation(test));
+		
+		// test random accusation
+		test = new Solution();
+		test.setPerson("Jon");
+		test.setRoom("Bedroom");
+		test.setWeapon("Gun");
+		
+		assertFalse(board.checkAccusation(test));
 	}
 	
 	/* Test selecting target location
