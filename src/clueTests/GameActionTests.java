@@ -139,7 +139,7 @@ public class GameActionTests {
 		Solution suggestion = new Solution();
 		
 		// test for person card
-		suggestion.person = greysonCard.getCardName();
+		suggestion.person = barryCard.getCardName();
 		suggestion.weapon = null;
 		suggestion.room = null;
 		

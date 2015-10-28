@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class Player {
@@ -22,10 +23,32 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Solution suggestion){
-		return null;}
+		
+		
+		ArrayList<Card> cardMatches = new ArrayList<Card>();
+		for (int i = 0; i < myCards.size(); i++) {
+			
+			if(myCards.get(i).getCardName() == suggestion.person)
+				cardMatches.add(myCards.get(i));
+			if(myCards.get(i).getCardName() == suggestion.weapon)
+				cardMatches.add(myCards.get(i));
+			if(myCards.get(i).getCardName() == suggestion.room)
+				cardMatches.add(myCards.get(i));
+			
+		}
+		
+		if(cardMatches.size() > 1){
+			Random randNum = new Random();
+			int randomCard = randNum.nextInt(cardMatches.size());
+			return cardMatches.get(randomCard);
+			
+		}
+		else if(cardMatches.size() == 0)
+			return null;
+		else
+		return cardMatches.get(0);
+	}
 	
-	public Card disproveSuggestion(Card suggestion){
-		return null;}
 	
 	public String getPlayerName(){
 		return playerName;

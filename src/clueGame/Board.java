@@ -427,7 +427,27 @@ public class Board
 
 	}
 	
-	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {return null;}
+	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
+		
+		int pos = 0;
+		for (int i = 0; i < players.length; i++) {
+			if(players[i].getPlayerName() == accusingPlayer)
+				pos = i;
+			}
+		
+		
+		for (int i = (pos + 1) % players.length; i < players.length - 1 + (pos + 1) % players.length; i = (i + 1) % players.length) {
+			
+			if(players[i].disproveSuggestion(suggestion) != null)
+				return players[i].disproveSuggestion(suggestion);
+			
+			
+		}
+		
+		
+		
+		
+		return null;}
 	
 	public boolean checkAccusation(Solution accusation){
 		if( accusation.equals(answer) )
