@@ -274,11 +274,11 @@ public class Board
 
 		visited.add(startCell);
 		this.findAllTargets(startCell, pathLength);
-		for(BoardCell b : targets)
-		{
-			System.out.println(b);
-		}
-		System.out.println();
+//		for(BoardCell b : targets)
+//		{
+//			System.out.println(b);
+//		}
+//		System.out.println();
 	}
 
 	public void findAllTargets(BoardCell startCell, int numSteps)

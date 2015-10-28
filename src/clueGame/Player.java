@@ -19,6 +19,7 @@ public class Player {
 	
 	public Player() {
 		myCards = new ArrayList<Card>();
+		seenCards = new ArrayList<Card>();
 		visitedDoors = new HashSet<BoardCell>();
 	}
 
@@ -76,6 +77,12 @@ public class Player {
 		return myCards;
 		
 	}
+	
+public ArrayList<Card> getSeenCards(){
+		
+		return seenCards;
+		
+	}
 
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
@@ -97,6 +104,11 @@ public class Player {
 		
 		myCards.add(acard);
 		
+	}
+	
+public void addSeenCards(Card acard){
+		if( !seenCards.contains(acard))
+			seenCards.add(acard);
 	}
 	
 	public Set<BoardCell> getVisitedDoors(){

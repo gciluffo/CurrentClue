@@ -29,6 +29,21 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void makeAccusation(){}
-	public void makeSuggestion(Board board, BoardCell location){}
+	
+	public Solution makeSuggestion(Board board, BoardCell location){
+		if(!location.isDoorway())
+			return null;
+		
+		// suggestion's room is the room that the player is in.
+		Solution suggestion = new Solution();
+		suggestion.room = board.getRooms().get(location.getInitial());
+		
+		// get random weapon and person cards that have not been seen and are not in
+		// the computer player's hand. 
+		
+		return null;
+		
+		
+	}
 
 }

@@ -239,4 +239,22 @@ public class GameActionTests {
 				players[3].getPlayerName(), new BoardCell(8,0,'k')) == barryCard);
 		
 	}
+	
+	@Test
+	public void testComputerSuggestion()
+	{
+		Player [] players = board.getPlayers();
+		
+		players[1].getSeenCards().add(bucketCard);
+		players[1].getSeenCards().add(barryCard);
+		players[2].getMyCards().add(greysonCard);
+		
+		Solution suggestion = ((ComputerPlayer) players[1]).makeSuggestion(board, board.getCellAt(8, 0));
+		
+		assertTrue(board.handleSuggestion(suggestion, 
+				players[1].getPlayerName(), board.getCellAt(8, 0)) == greysonCard);
+		
+		
+	}
+	
 }
