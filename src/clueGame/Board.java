@@ -436,10 +436,10 @@ public class Board
 			}
 		
 		
-		for (int i = (pos + 1) % players.length; i < players.length - 1 + (pos + 1) % players.length; i = (i + 1) % players.length) {
+		for (int i = (pos + 1) % players.length; i < players.length - 1 + (pos + 1) % players.length; i++) {
 			
-			if(players[i].disproveSuggestion(suggestion) != null)
-				return players[i].disproveSuggestion(suggestion);
+			if(players[i%players.length].disproveSuggestion(suggestion) != null)
+				return players[i%players.length].disproveSuggestion(suggestion);
 			
 			
 		}
