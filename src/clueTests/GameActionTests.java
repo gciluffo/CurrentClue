@@ -22,6 +22,7 @@ public class GameActionTests {
 	private static Card hammerCard;
 	private static Card kitchenCard;
 	private static Card bedroomCard;
+	private static Card obsCard;
 	
 	@BeforeClass
 	public static void setUp() {
@@ -33,6 +34,7 @@ public class GameActionTests {
 		hammerCard = new Card("Hammer", CardType.WEAPON);
 		kitchenCard = new Card("Kitchen", CardType.ROOM);
 		bedroomCard = new Card("Bedroom", CardType.ROOM);
+		obsCard = new Card("Observatory", CardType.ROOM);
 	}
 	
 	
@@ -245,14 +247,25 @@ public class GameActionTests {
 	{
 		Player [] players = board.getPlayers();
 		
+		// set up only one possible suggestion to make
+		// each player does not have a null list.
 		players[1].getSeenCards().add(bucketCard);
 		players[1].getSeenCards().add(barryCard);
-		players[2].getMyCards().add(greysonCard);
+		players[2].addMyCards(greysonCard);
+		players[2].addMyCards(hammerCard);
+		players[0].addMyCards(barryCard);
+		players[1].addMyCards(bucketCard);
+		players[3].addMyCards(kitchenCard);
+		players[4].addMyCards(obsCard);
+		players[5].addMyCards(bedroomCard);
 		
+		// get suggestion from computer player making suggestion
 		Solution suggestion = ((ComputerPlayer) players[1]).makeSuggestion(board, board.getCellAt(8, 0));
-		
-		assertTrue(board.handleSuggestion(suggestion, 
-				players[1].getPlayerName(), board.getCellAt(8, 0)) == greysonCard);
+		for( int i = 0; i < 10; i++ )
+		{
+			Card test = board.handleSuggestion(suggestion, players[1].getPlayerName(), board.getCellAt(8, 0));
+			assertTrue(test == greysonCard || test == hammerCard);
+		}
 		
 		
 	}
