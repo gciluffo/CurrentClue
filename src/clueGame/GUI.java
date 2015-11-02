@@ -6,6 +6,7 @@ package clueGame;
 	
 
 	import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextField;
 
@@ -19,17 +20,24 @@ import javax.swing.border.TitledBorder;
 
 	public class GUI extends JFrame {
 		private JTextField name;
+		private JTextField die;
+		private JTextField guessedName;
 
 		public GUI()
 		{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setTitle("Clue");
-			setSize(600, 200);
+			setSize(800, 200);
 			JPanel panel = createNamePanel();
-			add(panel, BorderLayout.NORTH);
+			add(panel, BorderLayout.WEST);
 			panel = createButtonPanel();
 			add(panel, BorderLayout.EAST);
+			panel = createDicePanel();
+			add(panel, BorderLayout.SOUTH);
 			panel = createGuessPanel();
+			add(panel, BorderLayout.CENTER);
+			
+			
 		}
 
 		
@@ -39,6 +47,8 @@ import javax.swing.border.TitledBorder;
 			 	JLabel nameLabel = new JLabel("Whose turn?");
 			 	panel.add(name);
 			 	nameLabel.setLabelFor(name);
+			 	nameLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, nameLabel.getMinimumSize().height));
+		        add(nameLabel);
 				panel.add(nameLabel, BorderLayout.NORTH);
 				
 				return panel;
@@ -46,7 +56,7 @@ import javax.swing.border.TitledBorder;
 		 
 		private JPanel createButtonPanel() {
 			JButton nextPlayer = new JButton("Next player");
-			nextPlayer.setBounds(20,5,20,5);
+			//nextPlayer.setBounds(20,5,20,5);
 			JButton makeAccusation = new JButton("Make an accusation");
 			JPanel panel = new JPanel(new GridLayout(4,4,4,4));
 			panel.add(nextPlayer);
@@ -56,14 +66,29 @@ import javax.swing.border.TitledBorder;
 		
 		
 		 private JPanel createGuessPanel() {
-			 
-			 	JPanel panel = new JPanel();
-			 	JLabel nameLabel = new JLabel("Guess");
-				name = new JTextField(20);
-				panel.setLayout(new GridLayout(1,2));
-				panel.add(nameLabel);
-				panel.add(name);
-				panel.setBorder(new TitledBorder (new EtchedBorder(), "Who are you?"));
+			 JPanel panel = new JPanel(new BorderLayout());
+			 	guessedName = new JTextField(20);
+			 	JLabel guessedLabel = new JLabel("Guess");
+			 	panel.add(guessedName);
+			 	guessedLabel.setLabelFor(guessedName);
+			 	guessedLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, guessedLabel.getMinimumSize().height));
+		        add(guessedLabel);
+		        panel.setBorder(new TitledBorder (new EtchedBorder(), "Guess"));
+				panel.add(guessedLabel, BorderLayout.NORTH);
+				
+				return panel;
+			 	
+		}
+		 
+		 private JPanel createDicePanel() {
+			 	JPanel panel = new JPanel(new BorderLayout());
+			 	die = new JTextField(1);
+			 	JLabel nameLabel = new JLabel("Roll  ");
+			 	panel.add(die);
+			 	nameLabel.setLabelFor(die);
+				panel.add(nameLabel, BorderLayout.WEST);
+				panel.setBorder(new TitledBorder (new EtchedBorder(), "Die"));
+				
 				return panel;
 		}
 		
