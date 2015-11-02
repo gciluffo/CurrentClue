@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 		private JTextField name;
 		private JTextField die;
 		private JTextField guessedName;
+		private JTextField guessResult;
 
 		public GUI()
 		{
@@ -35,7 +36,10 @@ import javax.swing.border.TitledBorder;
 			panel = createDicePanel();
 			add(panel, BorderLayout.SOUTH);
 			panel = createGuessPanel();
+			add(panel, BorderLayout.NORTH);
+			panel = createGuessResponsePanel();
 			add(panel, BorderLayout.CENTER);
+			
 			
 			
 		}
@@ -83,6 +87,7 @@ import javax.swing.border.TitledBorder;
 		 private JPanel createDicePanel() {
 			 	JPanel panel = new JPanel(new BorderLayout());
 			 	die = new JTextField(1);
+			 	die.setEditable(false);
 			 	JLabel nameLabel = new JLabel("Roll  ");
 			 	panel.add(die);
 			 	nameLabel.setLabelFor(die);
@@ -90,6 +95,22 @@ import javax.swing.border.TitledBorder;
 				panel.setBorder(new TitledBorder (new EtchedBorder(), "Die"));
 				
 				return panel;
+		}
+		 
+		 
+		 private JPanel createGuessResponsePanel() {
+			 JPanel panel = new JPanel(new BorderLayout());
+			 	guessResult = new JTextField(20);
+			 	JLabel guessedResultLabel = new JLabel("Response  ");
+			 	panel.add(guessResult);
+			 	guessedResultLabel.setLabelFor(guessResult);
+			 	guessedResultLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, guessedResultLabel.getMinimumSize().height));
+		        add(guessedResultLabel);
+		        panel.setBorder(new TitledBorder (new EtchedBorder(), "Guess Result"));
+				panel.add(guessedResultLabel, BorderLayout.WEST);
+				
+				return panel;
+			 	
 		}
 		
 		public static void main(String[] args) {
