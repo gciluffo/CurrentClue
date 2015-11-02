@@ -6,15 +6,16 @@ package clueGame;
 	
 
 	import java.awt.BorderLayout;
-	import java.awt.GridLayout;
+import java.awt.GridLayout;
+import java.awt.TextField;
 
 	import javax.swing.JButton;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
-	import javax.swing.JPanel;
-	import javax.swing.JTextField;
-	import javax.swing.border.EtchedBorder;
-	import javax.swing.border.TitledBorder;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 	public class GUI extends JFrame {
 		private JTextField name;
@@ -22,31 +23,32 @@ package clueGame;
 		public GUI()
 		{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setTitle("GUI Example");
+			setTitle("Clue");
 			setSize(600, 200);
 			JPanel panel = createNamePanel();
-			add(panel, BorderLayout.SOUTH);
+			add(panel, BorderLayout.NORTH);
 			panel = createButtonPanel();
 			add(panel, BorderLayout.EAST);
+			panel = createGuessPanel();
 		}
 
 		
 		 private JPanel createNamePanel() {
-			 	JPanel panel = new JPanel();
-			 	JLabel nameLabel = new JLabel("Whose turn?", JLabel.CENTER);
-				name = new JTextField(20);
-				panel.setLayout(new GridLayout(1,2));
-				panel.add(nameLabel, BorderLayout.SOUTH);
-				panel.add(name);
+			 	JPanel panel = new JPanel(new BorderLayout());
+			 	name = new JTextField(20);
+			 	JLabel nameLabel = new JLabel("Whose turn?");
+			 	panel.add(name);
+			 	nameLabel.setLabelFor(name);
+				panel.add(nameLabel, BorderLayout.NORTH);
 				
 				return panel;
 		}
 		 
 		private JPanel createButtonPanel() {
 			JButton nextPlayer = new JButton("Next player");
-			nextPlayer.setSize(20, 20);
+			nextPlayer.setBounds(20,5,20,5);
 			JButton makeAccusation = new JButton("Make an accusation");
-			JPanel panel = new JPanel();
+			JPanel panel = new JPanel(new GridLayout(4,4,4,4));
 			panel.add(nextPlayer);
 			panel.add(makeAccusation);
 			return panel;
