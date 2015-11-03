@@ -1,11 +1,54 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class BoardCell 
 {
 	private int row;
 	private int column;
 	private char initial;
 	private DoorDirection dir;
+	private int size;
+	
+	public void draw(Graphics g, int numRow, int numCol){
+		
+		size = 30;
+		
+		if(initial=='W'){
+		g.setColor(Color.YELLOW);
+		g.drawRect(row*size, column*size, size, size);
+		}
+		else if(isDoorway()){
+			g.setColor(Color.BLUE);
+			
+			switch (dir) {
+			case UP:
+				
+				
+				g.drawRect(row*size, column*size, size/8, size);
+				
+				
+				break;
+			case DOWN:
+				
+				break;
+				
+			case LEFT:
+				break;
+					
+			case RIGHT:
+				
+				
+
+			default:
+				break;
+			}
+		
+		}
+		
+	}
+	
 	
 	public BoardCell(int r, int c, char i)
 	{

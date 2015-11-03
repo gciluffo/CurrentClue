@@ -18,13 +18,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-	public class GUI extends JFrame {
+	public class GUIControlPanel extends JFrame {
 		private JTextField name;
 		private JTextField die;
 		private JTextField guessedName;
 		private JTextField guessResult;
 
-		public GUI()
+		public GUIControlPanel()
 		{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setTitle("Clue");
@@ -115,7 +115,7 @@ import javax.swing.border.TitledBorder;
 		}
 		
 		public static void main(String[] args) {
-			GUI gui = new GUI();	
+			GUIControlPanel gui = new GUIControlPanel();	
 			gui.setVisible(true);
 		}
 

@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,10 +17,12 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
 
-public class Board 
+public class Board extends JPanel
 {
 	private int numRows = 0;
 	private int numColumns = 0;
@@ -35,7 +38,27 @@ public class Board
 	private ArrayList<Card> deck;
 	private static Solution answer;
 
-
+	
+	@Override
+	public void paintComponent(Graphics g){
+		
+		 super.paintComponent(g);
+		 
+		 for (int i = 0; i < numRows; i++) {
+			 for (int j = 0; j < numColumns; j++) {
+				 
+				 board[i][j].draw(g, numRows, numColumns);
+				
+			}
+		}
+		 
+		
+		
+	}
+	
+	
+	
+	
 	public Board()
 	{
 		boardConfigFile = "ClueBoardCSV.csv";
