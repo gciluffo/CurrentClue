@@ -17,27 +17,31 @@ public class BoardCell
 		
 		if(initial=='W'){
 		g.setColor(Color.YELLOW);
-		g.drawRect(row*size, column*size, size, size);
+		g.fillRect(column*size, row*size, size, size);
+		g.setColor(Color.BLACK);
+		g.drawRect(column*size, row*size, size, size);
 		}
+		else if(initial == 'X'){
+			g.setColor(Color.RED);
+			g.fillRect(column*size, row*size, size, size);
+		}
+			
 		else if(isDoorway()){
 			g.setColor(Color.BLUE);
 			
 			switch (dir) {
 			case UP:
-				
-				
-				g.drawRect(row*size, column*size, size/8, size);
-				
-				
+				g.fillRect(column*size, row*size, size, size/8);
 				break;
 			case DOWN:
-				
-				break;
-				
+				g.fillRect(column*size, (row+1)*size - size/8, size, size/8);
+				break;	
 			case LEFT:
-				break;
-					
+				g.fillRect(column*size, row*size, size/8, size);
+				break;	
 			case RIGHT:
+				g.fillRect((column+1)*size - size/8, row*size, size/8, size);
+				break;
 				
 				
 
