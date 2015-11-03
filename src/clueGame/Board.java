@@ -40,20 +40,19 @@ public class Board extends JPanel
 
 	
 	@Override
-	public void paintComponent(Graphics g){
-		
+	public void paintComponent(Graphics g)
+	{
 		 super.paintComponent(g);
 		 
-		 for (int i = 0; i < numRows; i++) {
-			 for (int j = 0; j < numColumns; j++) {
+		 for (int i = 0; i < numRows; i++)
+		 {
+			 for (int j = 0; j < numColumns; j++) 
+			 {
 				 
-				 board[i][j].draw(g, numRows, numColumns);
+				 board[i][j].draw(g, rooms.get(board[i][j].getInitial()));
 				
-			}
-		}
-		 
-		
-		
+			 }
+		 }
 	}
 	
 	
@@ -214,6 +213,10 @@ public class Board extends JPanel
 					case 'n':
 					case 'N':
 						board[rowNum][colNum].setDoorDirection(DoorDirection.NONE);
+						break;
+					case 'h':
+					case 'H':
+						board[rowNum][colNum].setNameHere(true);
 						break;
 					default:
 						throw new BadConfigFormatException("Invalid door direction in board config file");

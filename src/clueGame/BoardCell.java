@@ -10,8 +10,14 @@ public class BoardCell
 	private char initial;
 	private DoorDirection dir;
 	private int size;
+	private boolean nameHere = false;
 	
-	public void draw(Graphics g, int numRow, int numCol){
+	public void setNameHere(boolean nameHere) {
+		this.nameHere = nameHere;
+	}
+
+
+	public void draw(Graphics g, String room){
 		
 		size = 30;
 		
@@ -27,6 +33,9 @@ public class BoardCell
 		}
 			
 		else if(isDoorway()){
+			g.setColor(Color.GRAY);
+			g.fillRect(column*size, row*size, size, size);
+			
 			g.setColor(Color.BLUE);
 			
 			switch (dir) {
@@ -42,14 +51,21 @@ public class BoardCell
 			case RIGHT:
 				g.fillRect((column+1)*size - size/8, row*size, size/8, size);
 				break;
-				
-				
-
 			default:
 				break;
 			}
-		
 		}
+		else {
+			g.setColor(Color.GRAY);
+			g.fillRect(column*size, row*size, size, size);
+		}
+		
+		if(nameHere)
+		{
+			g.setColor(Color.BLUE);
+			g.drawString(room.toUpperCase(), column*size, row*size);
+		}
+			
 		
 	}
 	
