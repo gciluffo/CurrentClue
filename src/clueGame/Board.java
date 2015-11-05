@@ -49,7 +49,7 @@ public class Board extends JPanel
 			 for (int j = 0; j < numColumns; j++) 
 			 {
 				 
-				 board[i][j].draw(g, rooms.get(board[i][j].getInitial()));
+				 board[i][j].draw(g, this);
 				
 			 }
 		 }

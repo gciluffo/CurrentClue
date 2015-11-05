@@ -9,7 +9,7 @@ public class BoardCell
 	private int column;
 	private char initial;
 	private DoorDirection dir;
-	private int size;
+	private static int size;
 	private boolean nameHere = false;
 	
 	public void setNameHere(boolean nameHere) {
@@ -17,9 +17,7 @@ public class BoardCell
 	}
 
 
-	public void draw(Graphics g, String room){
-		
-		size = 30;
+	public void draw(Graphics g, Board board){
 		
 		if(initial=='W'){
 		g.setColor(Color.YELLOW);
@@ -28,7 +26,7 @@ public class BoardCell
 		g.drawRect(column*size, row*size, size, size);
 		}
 		else if(initial == 'X'){
-			g.setColor(Color.RED);
+			g.setColor(Color.lightGray);
 			g.fillRect(column*size, row*size, size, size);
 		}
 			
@@ -63,7 +61,20 @@ public class BoardCell
 		if(nameHere)
 		{
 			g.setColor(Color.BLUE);
-			g.drawString(room.toUpperCase(), column*size, row*size);
+			g.drawString(board.getRooms().get(initial).toUpperCase(), column*size, row*size);
+		}
+		
+		Player[] players = board.getPlayers();
+		
+		for (int i = 0; i < players.length; i++) {
+			if(players[i].getPlayerRow() == row
+					&& players[i].getPlayerColumn() == column)
+			{
+				g.setColor(players[i].getPlayerColor());
+				g.fillOval(column*size, row*size, size, size);
+				g.setColor(Color.BLACK);
+				g.drawOval(column*size, row*size, size, size);
+			}
 		}
 			
 		
@@ -76,6 +87,7 @@ public class BoardCell
 		column = c;
 		initial = i;
 		dir = DoorDirection.NONE;
+		size = 30;
 	}
 	
 	public boolean isWalkway()
@@ -143,5 +155,10 @@ public class BoardCell
 	public int getColumn() 
 	{
 		return column;
+	}
+	
+	public int getSize() 
+	{
+		return size;
 	}
 }
