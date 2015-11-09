@@ -9,7 +9,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class ClueGame extends JFrame {
-
+	private Board board;
+	private DetectiveDialog dialog;
 	public ClueGame(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -17,7 +18,7 @@ public class ClueGame extends JFrame {
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		
-		Board board = new Board();
+		board = new Board();
 		board.initialize();
 		setSize(board.getCellAt(0, 0).getSize()*board.getNumRows(), 
 				board.getCellAt(0, 0).getSize()*board.getNumColumns() 
@@ -44,7 +45,8 @@ public class ClueGame extends JFrame {
 				System.exit(0);
 				break;
 			case "Detective Notes":
-				
+				dialog = new DetectiveDialog(board);
+				dialog.setVisible(true);
 				break;
 			default:
 				break;

@@ -36,6 +36,7 @@ public class Board extends JPanel
 	private String roomConfigFile;
 	private Player players[];
 	private ArrayList<Card> deck;
+	private ArrayList<String> weapons;
 	private static Solution answer;
 
 	
@@ -74,6 +75,7 @@ public class Board extends JPanel
 		rooms = new HashMap<Character, String>();
 		adjMatrix = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		targets = new HashSet<BoardCell>();
+		
 	}
 
 	public void initialize()
@@ -383,6 +385,7 @@ public class Board extends JPanel
 
 	public void loadCards(){
 
+		weapons = new ArrayList<String>();
 		@SuppressWarnings("resource")
 		FileReader reader = null;
 		try {
@@ -396,6 +399,8 @@ public class Board extends JPanel
 				String temp = s.nextLine();
 				temp = temp.replace(", ", "");
 				deck.get(count).setCardType(CardType.fromString(temp));
+				if(deck.get(count).getCardType() == CardType.WEAPON)
+					weapons.add(deck.get(count).getCardName());
 				count++;
 			}
 		} catch (FileNotFoundException e) {
@@ -530,6 +535,11 @@ public class Board extends JPanel
 
 	public Solution getSolution() {
 		return answer;
+	}
+	
+	public String[] getWeapons()
+	{
+		return weapons.toArray(new String[0]);
 	}
 
 
